@@ -1,26 +1,96 @@
 @import "tailwindcss";
+@import "@fontsource/tajawal/400.css";
+@import "@fontsource/tajawal/500.css";
+@import "@fontsource/tajawal/700.css";
+@import "@fontsource/tajawal/800.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-sans: "Tajawal", "Segoe UI", Tahoma, system-ui, sans-serif;
+  --color-paper: #faf7ef;
+  --color-card: #ffffff;
+  --color-ink: #17283b;
+  --color-danger: #9b3a26;
+  --color-board: #14463f;
+  --color-board-deep: #0d302b;
+  --color-chalk: #f4d35e;
+  --color-accent: #0f8a7a;
+  --color-line: #e3dccb;
+  --color-muted: #5d6b79;
+
+  /* ألوان ثابتة في الوضعين: الرسومات تظهر دائمًا على سبورة داكنة */
+  --color-graph-root: #ff8a7a;
+  --color-graph-vertex: #7dd3fc;
+  --color-key: #f4f1e8;
+  --color-key-ink: #17283b;
+  --color-key-operator: #0f8a7a;
+  --color-key-danger: #c8553d;
+  --color-on-board-error: #ffb4a2;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* الوضع الداكن: نفس الأسماء بقيم مختلفة، فتتبدّل كل الأصناف تلقائيًا */
+[data-theme="dark"] {
+  --color-paper: #0e1918;
+  --color-card: #162524;
+  --color-ink: #e9ede7;
+  --color-line: #2a3c39;
+  --color-muted: #9db0aa;
+  --color-accent: #45c7b3;
+  --color-danger: #ffb4a2;
+  color-scheme: dark;
+}
+[data-theme="light"] {
+  color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
-
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  line-height: 1.8;
+}
+/* ورق مربعات الدفتر */
+.grid-paper {
+  background-image:
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--color-ink) 7%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--color-ink) 7%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 28px 28px;
+}
+.board-grid {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.math {
+  direction: ltr;
+  unicode-bidi: isolate;
+  font-variant-numeric: tabular-nums;
+  font-family: "Cambria Math", "Times New Roman", serif;
+}
+input[type="range"] {
+  accent-color: var(--color-accent);
+  width: 100%;
+}
+:focus-visible {
+  outline: 3px solid var(--color-chalk);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    transition: none !important;
+  }
 }

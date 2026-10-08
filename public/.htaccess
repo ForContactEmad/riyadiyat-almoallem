@@ -1,0 +1,46 @@
+# ===== رياضيات المعلم — إعدادات Apache للموقع الثابت =====
+# ملاحظة: تفعيل HTTP/2 يتم في إعداد الخادم (VirtualHost) وليس هنا — انظر deploy/apache-vhost.conf
+
+Options -Indexes
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+
+# إجبار HTTPS (HTTP/2 في المتصفحات يتطلب TLS)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # الروابط القديمة بدون بادئة لغة → النسخة العربية
+  RewriteRule ^(lessons|blog|calculator|contact)(/.*)?$ /ar/$1$2 [L,R=301]
+</IfModule>
+
+# الضغط
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/css application/javascript application/json image/svg+xml text/plain application/xml
+</IfModule>
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml text/plain application/xml
+</IfModule>
+
+# التخزين المؤقت
+<IfModule mod_headers.c>
+  # ملفات Next.js تحمل بصمة (hash) في أسمائها → تخزين دائم
+  <If "%{REQUEST_URI} =~ m#^/_next/static/#">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </If>
+  <FilesMatch "\.(svg|png|jpg|jpeg|webp|avif|ico|woff2)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+  <FilesMatch "\.(html|txt|xml)$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+
+  # رؤوس الأمان
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" "expr=%{HTTPS} == 'on'"
+</IfModule>
+
+AddDefaultCharset UTF-8

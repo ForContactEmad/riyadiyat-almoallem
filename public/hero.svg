@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 420" font-family="Cambria Math, Times New Roman, serif">
+  <rect x="8" y="8" width="544" height="404" rx="18" fill="#0d302b" stroke="#c9a66b" stroke-width="10"/>
+  <g stroke="#fff" stroke-opacity=".08">
+    <path d="M60 30v360M120 30v360M180 30v360M240 30v360M300 30v360M360 30v360M420 30v360M480 30v360M30 90h500M30 150h500M30 210h500M30 270h500M30 330h500"/>
+  </g>
+  <path d="M40 270h300M180 60v300" stroke="#fff" stroke-opacity=".75" stroke-width="2"/>
+  <path d="M70 80 Q180 460 290 80" fill="none" stroke="#f4d35e" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="127" cy="270" r="6" fill="#ff8a7a"/><circle cx="233" cy="270" r="6" fill="#ff8a7a"/><circle cx="180" cy="270" r="0"/>
+  <text x="212" y="76" fill="#f4d35e" font-size="22" transform="rotate(0)">y = x² − 3</text>
+  <path d="M380 330h130V190z" fill="#f4d35e" fill-opacity=".18" stroke="#fff" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M494 330v-16h16" fill="none" stroke="#fff" stroke-width="2"/>
+  <text x="372" y="368" fill="#fff" font-size="24">a² + b² = c²</text>
+  <g fill="#fff" fill-opacity=".85" font-size="30">
+    <text x="372" y="92">π ≈ 3.14159</text>
+    <text x="372" y="140" fill="#7dd3fc">∑  √  ∞  ÷</text>
+  </g>
+</svg>
